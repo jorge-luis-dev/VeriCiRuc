@@ -11,12 +11,12 @@ class Ci(val ci : String){
             return false
         if (!provincia())
             return false
-        modulo10()
-
+        if (!modulo10())
+            return false
         return true
     }
 
-    /*
+    /**
     Función que verifica si son los digitos correctos
      */
     fun basica(dijitos : Int) : Boolean {
@@ -29,7 +29,7 @@ class Ci(val ci : String){
         error = "El número de díjitos es de 10 para la Cédula y 13 para el RUC"
         return false
     }
-    /*
+    /**
     Función que identifica si es un número
      */
     fun isNumeric(input : String) : Boolean {
@@ -40,7 +40,7 @@ class Ci(val ci : String){
             return false
         }
     }
-    /*
+    /**
     Función que verifica la provincia
      */
     fun provincia() : Boolean {
@@ -57,18 +57,41 @@ class Ci(val ci : String){
         val dijitos = ci.substring(0,9).toCharArray()
         val verificador = ci.substring(9,10).toInt()
         val multiplicadores : IntArray = intArrayOf(2,1,2,1,2,1,2,1,2)
-
+        var valor : Int
+        var total : Int = 0
+        val residuo : Int
+        val resultado : Int
 
         println("Verificador: ${verificador}")
+
         for (i in dijitos.indices){
             val multiplicador = multiplicadores[i]
             val dijito  = dijitos[i].toString().toInt()
-            val resultado = multiplicador*dijito
+            valor = multiplicador*dijito
 
-            println("Multiplicador:  ${multiplicador} * Díjito: ${dijitos[i]} = $resultado")
+            if (valor >= 10)
+                valor = valor.toString().substring(0,1).toInt() + valor.toString().substring(1,2).toInt()
 
+            println("Multiplicador:  ${multiplicador} * Díjito: ${dijitos[i]} = $valor")
+
+            total = total + valor
         }
+        println("Total = $total")
 
+        residuo = total % 10
+
+        println("Residuo = $residuo")
+
+        if (residuo == 0)
+            resultado = 0
+        else
+            resultado = 10 - residuo
+
+        if (resultado == verificador)
+            println("Resultado = $resultado")
+            return true
+
+        error = "Los números no cumplen la validación del algoritomo módulo 10"
         return false
     }
 }
