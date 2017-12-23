@@ -25,9 +25,7 @@ class Ruc(val ruc : String) : Ci(ci = ruc) {
                 return true
         }
         else
-            return false
-
-        return true
+            return true
     }
 
     fun natural() : Boolean {
@@ -109,8 +107,8 @@ class Ruc(val ruc : String) : Ci(ci = ruc) {
         val multiplicadores : IntArray
         val dijitos : CharArray
         val verificador : Int
-        var valor : Int = 0
-        var total : Int = 0
+        var valor : Int
+        var total = 0
         val residuo : Int
         val resultado : Int
         
