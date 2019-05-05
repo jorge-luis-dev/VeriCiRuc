@@ -12,3 +12,7 @@ Verfica, valida  la Cédula y RUC de Ecuador en Kotlin y Java
         $ kotlinc Ci.kt Ruc.kt -include-runtime -d CiRuc.jar
 
 4. Añade a tu proyecto Java
+
+## Añadir al repositorio maven local
+        $ mvn install:install-file -Dfile=CiRuc.jar -DgroupId=com.documento -DartifactId=CiRuc -Dversion=1.0 -Dpackaging=jar
+
